@@ -17,7 +17,15 @@ class ImageViewLayoutBlockBuilder : LayoutBlockBuilder<UIView> {
     override func build(markDownItem:MarkDownItem, asPartOfConverter converter : MarkDownConverter<UIView>, styling : ItemStyling) -> UIView {
         let imageBlockMarkDownItem = markDownItem as! ImageBlockMarkDownItem
 
-        let imageView = RemoteImageView(file: imageBlockMarkDownItem.file, altText: imageBlockMarkDownItem.altText)
+        var path = imageBlockMarkDownItem.file
+        
+        if let baseURL = (styling as? ImageStyling).baseURL,
+            imagePath = baseURL.URLByAppendingPathComponent(imageMarkDownItem.file).path
+        {
+            path = imagePath
+        }
+        
+        let imageView = RemoteImageView(file: path, altText: imageBlockMarkDownItem.altText)
         
         let spacing:UIEdgeInsets? = (styling as? ContentInsetStylingRule)?.contentInsets
         return ContainerView(view: imageView, spacing: spacing)
