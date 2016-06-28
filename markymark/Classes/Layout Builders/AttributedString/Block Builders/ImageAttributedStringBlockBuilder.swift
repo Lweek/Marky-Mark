@@ -25,8 +25,9 @@ class ImageAttributedStringBlockBuilder : LayoutBlockBuilder<NSMutableAttributed
         
         let imageStyling = styling as! ImageStyling
         if let baseURL = imageStyling.baseURL {
-            let imagePath = baseURL.URLByAppendingPathComponent(imageMarkDownItem.file).path
-            if let image = UIImage(contentsOfFile: imagePath) {
+            if let imagePath = baseURL.URLByAppendingPathComponent(imageMarkDownItem.file).path,
+                image = UIImage(contentsOfFile: imagePath)
+            {
                 attachment.image = image
             }
         }
