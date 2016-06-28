@@ -18,9 +18,16 @@ class ImageAttributedStringBlockBuilder : LayoutBlockBuilder<NSMutableAttributed
         let imageMarkDownItem = markDownItem as! ImageMarkDownItem
 
         let attachment = NSTextAttachment()
-        
+
         if let image = UIImage(named: imageMarkDownItem.file) {
             attachment.image = image
+        }
+        
+        if let basePath = styling.basePath {
+            let imagePath = basePath.stringByAppendingPathComponent(imageMarkDownItem.file)
+            if let image = UIImage(contentsOfFile: imagePath) {
+                attachment.image = image
+            }
         }
 
         let mutableAttributedString = NSAttributedString(attachment: attachment)
