@@ -19,7 +19,7 @@ class ImageViewLayoutBlockBuilder : LayoutBlockBuilder<UIView> {
 
         var path = imageBlockMarkDownItem.file
         
-        if let baseURL = (styling as? ImageStyling).baseURL,
+        if let baseURL = (styling as? ImageStyling)?.baseURL,
             imagePath = baseURL.URLByAppendingPathComponent(imageMarkDownItem.file).path
         {
             path = imagePath
