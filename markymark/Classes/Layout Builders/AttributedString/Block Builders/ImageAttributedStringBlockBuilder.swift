@@ -23,7 +23,8 @@ class ImageAttributedStringBlockBuilder : LayoutBlockBuilder<NSMutableAttributed
             attachment.image = image
         }
         
-        if let basePath = styling.basePath {
+        let imageStyling = styling as! ImageStyling
+        if let basePath = imageStyling.basePath {
             let imagePath = basePath.stringByAppendingPathComponent(imageMarkDownItem.file)
             if let image = UIImage(contentsOfFile: imagePath) {
                 attachment.image = image
